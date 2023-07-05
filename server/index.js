@@ -47,14 +47,14 @@ app.get('/api/products', (req,res) => {
 // get a single entry by id
 app.get('/api/products/:id', (req,res) => {
 	const id = Number(req.params.id)
-    const joke = products.find(joke => joke.id === id)
-    res.json(joke)
+    const product = products.find(i => i.id === id)
+    res.json(product)
 })
 
 // delete an entry, returns status 204 with no response
 app.delete('/api/products/:id', (req,res) => {
     const id  = Number(req.params.id)
-    products = products.filter(joke => joke.id !== id)
+    products = products.filter(i => i.id !== id) //find() / filter()
     res.send('Deleted successfully!').end()
     //res.status(204).end()
 })
@@ -62,7 +62,7 @@ app.delete('/api/products/:id', (req,res) => {
 // add a new entry
 app.post('/api/products', (req,res) => {
     const maxId = products.length > 0
-        ? Math.max(...products.map(n => n.id))
+        ? Math.max(...products.map(i => i.id))
         : 0
     const product = req.body
     products.push(product)
