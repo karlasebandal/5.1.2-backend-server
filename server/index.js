@@ -32,16 +32,12 @@ let products =  [
 
 // responds to requests on root URL '/', e.g. localhost:3001/
 app.get('/', (req,res) => {
-    res.send('<h1>here comes the node express train!</h1>')
+    res.send('<h1>Welcome to my Construction Shop</h1>')
 })
-
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.get('/', (req,res) => {
-    res.send('<h1>Welcome to RF1 Batch</h1>')
-})
 
 // get all contents of database
 app.get('/api/products', (req,res) => {
@@ -59,7 +55,8 @@ app.get('/api/products/:id', (req,res) => {
 app.delete('/api/products/:id', (req,res) => {
     const id  = Number(req.params.id)
     products = products.filter(joke => joke.id !== id)
-    res.status(204).end()
+    res.send('Deleted successfully!').end()
+    //res.status(204).end()
 })
 
 // add a new entry
@@ -67,9 +64,9 @@ app.post('/api/products', (req,res) => {
     const maxId = products.length > 0
         ? Math.max(...products.map(n => n.id))
         : 0
-    const joke = req.body
-    products.push(joke)
-    res.json(joke)
+    const product = req.body
+    products.push(product)
+    res.json(product)
 })
 
 app.patch('/api/products/:id', (req, res) => {
