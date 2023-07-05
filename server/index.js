@@ -71,26 +71,26 @@ app.post('/api/products', (req,res) => {
 
 app.patch('/api/products/:id', (req, res) => {
     const id = Number(req.params.id);
-    const updatedJoke = req.body;
-    products = products.map(joke => {
-        if (joke.id === id) {
-            return { ...joke, ...updatedJoke };
+    const updatedProducts = req.body;
+    products = products.map(i => {
+        if (i.id === id) {
+            return { ...i, ...updatedProducts};
         }
-        return joke;
+        return i;
     });
-    res.json(products.find(joke => joke.id === id));
+    res.json(products.find(i => i.id === id));
 });
 
 app.put('/api/products/:id', (req, res) => {
   const id = Number(req.params.id);
-  const updatedJoke = req.body;
-  products = products.map((joke) => {
-    if (joke.id === id) {
-      return { ...joke, ...updatedJoke };
+  const updatedProducts = req.body;
+  products = products.map((i) => {
+    if (i.id === id) {
+      return { ...i, ...updatedProducts };
     }
-    return joke;
+    return i;
   });
-  res.json(products.find((joke) => joke.id === id));
+  res.json(products.find((i) => i.id === id));
 });
 
 // starts server on port 3001
